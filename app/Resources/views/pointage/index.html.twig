@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pointages </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Date</th>
+                <th scope="col">Heure d'entrée</th>
+                <th scope="col">Debut de pause</th>
+                <th scope="col">Fin de pause</th>
+                <th scope="col">Heure de sorti</th>
+                <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pointage in pointages %}
+            <tr>
+                <th scope="row"><a href="{{ path('pointage_show', { 'id': pointage.id }) }}">{{ pointage.id }}</a></th>
+                <td>{% if pointage.user.nom %}{{ pointage.user.nom }}{% endif %}</td>
+                <td>{% if pointage.user.prenom %}{{ pointage.user.prenom }}{% endif %}</td>
+                <td>{% if pointage.dateDuJour %}{{ pointage.dateDuJour|date('d/M/Y') }}{% endif %}</td>
+                <td>{% if pointage.heureEntre %}{{ pointage.heureEntre|date('H:i:s') }}{% endif %}</td>
+                <td>{% if pointage.debutPause %}{{ pointage.debutPause|date('H:i:s') }}{% endif %}</td>
+                <td>{% if pointage.finPause %}{{ pointage.finPause|date('H:i:s') }}{% endif %}</td>
+                <td>{% if pointage.heureSorti %}{{ pointage.heureSorti|date('H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul style="text-align: center;">
+                            <a class="btn btn-warning" href="{{ path('pointage_edit', { 'id': pointage.id }) }}">edit</a>
+                            <a class="btn btn-primary" href="{{ path('pointage_show', { 'id': pointage.id }) }}">show</a>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+            <a class="btn btn-primary" href="{{ path('pointage_new') }}">Create a new pointage</a>
+        <input type="button" class="btn btn-primary " id="save" value="Save">
+    </ul>
+    <script>
+        // language=JQuery-CSS
+        $('#save').onclick(function(){
+
+            $.ajax({
+                url:'{{path('affect')}}',
+                method:"GET",
+                data:{val:'mouad'},
+                success: function(json) {
+                  return  alert(json);
+                }
+            })
+        });
+        /////////////////////////////////////////////////////////
+    </script>
+{% endblock %}

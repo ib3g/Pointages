@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pointage</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pointage.id }}</td>
+            </tr>
+            <tr>
+                <th>Heureentre</th>
+                <td>{% if pointage.heureEntre %}{{ pointage.heureEntre|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Debutpause</th>
+                <td>{% if pointage.debutPause %}{{ pointage.debutPause|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Finpause</th>
+                <td>{% if pointage.finPause %}{{ pointage.finPause|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Heuresorti</th>
+                <td>{% if pointage.heureSorti %}{{ pointage.heureSorti|date('H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pointage_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('pointage_edit', { 'id': pointage.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
