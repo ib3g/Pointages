@@ -20,7 +20,7 @@ class pointageType extends AbstractType
     {
         $builder
             ->add('heureEntre',TimeType::class)
-            ->add('date_du_jour',DateType::class,['attr' => ['class' => 'form-control']])
+            ->add('date_du_jour',DateType::class)
             ->add('debutPause',TimeType::class)
             ->add('finPause',TimeType::class)
             ->add('heureSorti',TimeType::class);

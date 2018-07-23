@@ -21,7 +21,7 @@
         {% for pointage in pointages %}
             <tr>
                 <th scope="row"><a href="{{ path('pointage_show', { 'id': pointage.id }) }}">{{ pointage.id }}</a></th>
-                <td>{% if pointage.user.id %}{{ pointage.user.nom }}{% endif %}</td>
+                <td>{% if pointage.user.nom %}{{ pointage.user.nom }}{% endif %}</td>
                 <td>{% if pointage.user.prenom %}{{ pointage.user.prenom }}{% endif %}</td>
                 <td>{% if pointage.dateDuJour %}{{ pointage.dateDuJour|date('d/M/Y') }}{% endif %}</td>
                 <td>{% if pointage.heureEntre %}{{ pointage.heureEntre|date('H:i:s') }}{% endif %}</td>

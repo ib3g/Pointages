@@ -59,8 +59,8 @@ class pointageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
+            $pointage->setUser($this->getUser());
             $em->persist($pointage);
             $em->flush();
 

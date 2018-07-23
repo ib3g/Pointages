@@ -20,7 +20,6 @@ class LoginController extends Controller
         return $this->render('Login/login.html.twig', array(
             'errors' => $errors,
             'username' => $lastUserName,
-            
         ));
     }
 
