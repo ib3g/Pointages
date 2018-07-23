@@ -5,14 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
- * @UniqueEntity(fields={"email"}, message="this one is already taken")
+ * @UniqueEntity(fields={"username","email"}, message="this one is already taken")
  */
 class user implements  UserInterface
 {
@@ -50,7 +50,15 @@ class user implements  UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="Username", type="string", length=255)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Email", type="string", length=255)
+     * @Assert\Email()
      *
      */
     private $email;
@@ -252,7 +260,7 @@ class user implements  UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
     }
 
     /**
@@ -264,5 +272,19 @@ class user implements  UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return user
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
     }
 }

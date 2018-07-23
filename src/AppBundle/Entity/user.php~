@@ -4,16 +4,17 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
- * @UniqueEntity(fields={"email"}, message="this one is already taken")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository1")
+ * @UniqueEntity(fields={"username","email"}, message="this one is already taken")
  */
-class user
+class user implements  UserInterface
 {
     /**
      * @var int
@@ -49,7 +50,15 @@ class user
     /**
      * @var string
      *
+     * @ORM\Column(name="Username", type="string", length=255)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Email", type="string", length=255)
+     * @Assert\Email()
      *
      */
     private $email;
@@ -169,4 +178,99 @@ class user
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pointage = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pointage
+     *
+     * @param \AppBundle\Entity\pointage $pointage
+     *
+     * @return user
+     */
+    public function addPointage(\AppBundle\Entity\pointage $pointage)
+    {
+        $this->pointage[] = $pointage;
+
+        return $this;
+    }
+
+    /**
+     * Remove pointage
+     *
+     * @param \AppBundle\Entity\pointage $pointage
+     */
+    public function removePointage(\AppBundle\Entity\pointage $pointage)
+    {
+        $this->pointage->removeElement($pointage);
+    }
+
+    /**
+     * Get pointage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPointage()
+    {
+        return $this->pointage;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return [ 'ROLE_USER'];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }

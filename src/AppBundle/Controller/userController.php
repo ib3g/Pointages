@@ -6,6 +6,7 @@ use AppBundle\Entity\user;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * User controller.
@@ -36,14 +37,18 @@ class userController extends Controller
      *
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, UserPasswordEncoderInterface $encoder )
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\userType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword( $encoder->encodePassword($user, $user->getPassword()));
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -78,14 +83,20 @@ class userController extends Controller
      *
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param user $user
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, user $user)
+    public function editAction(Request $request, user $user, UserPasswordEncoderInterface $encoder)
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\userType', $user);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $user->setPassword( $encoder->encodePassword($user, $user->getPassword()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));

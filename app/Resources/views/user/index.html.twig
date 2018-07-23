@@ -9,8 +9,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
+                <th scope="col">Username</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
                 <th scope="col" style="text-align: center;">Actions</th>
             </tr>
         </thead>
@@ -20,8 +20,8 @@
                 <th scope="row"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></th>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
+                <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
                 <td>
                     <ul style="text-align: center;">
                             <a class="btn btn-warning"  href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
@@ -34,6 +34,6 @@
     </table>
 
     <ul>
-            <a class="btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>
+            <a class="btn btn-primary" href="{{ path('register') }}">Create a new user</a>
     </ul>
 {% endblock %}
