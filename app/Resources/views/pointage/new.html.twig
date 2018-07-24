@@ -2,23 +2,39 @@
 
 {% block body %}
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="text-center">New Pointage</h3>
-        </div>
-        <div class="panel-body">
 
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <input type="submit" value="Create" class="btn btn-primary" />
+        <div class="panel panel-info  ">
+            <div class="panel-heading">
+                <h3>Register</h3>
+            </div>
+            <div class="panel-body">
+                {{ form_start(form, {'attr': {'class': 'your-class'}} ) }}
+                <div class="form-row">
+                    <div class="col-md-3">
+                         {{ form_row(form.date_du_jour) }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form_row(form.heureEntre) }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form_row(form.debutPause) }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form_row(form.finPause) }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form_row(form.heureSorti) }}
+                    </div>
+                </div>
+                <input type="submit" value="Create" class="btn btn-info" />
             {{ form_end(form) }}
 
             <ul>
 
-                    <a class="btn btn-primary" href="{{ path('pointage_index') }}">Back to the list</a>
+                    <a class="btn btn-primary pull-right" href="{{ path('pointage_index') }}">Back to the list</a>
 
             </ul>
         </div>
     </div>
-    </div>
+
 {% endblock %}

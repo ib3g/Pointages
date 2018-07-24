@@ -19,8 +19,8 @@ class pointageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('heureEntre',TimeType::class)
             ->add('date_du_jour',DateType::class)
+            ->add('heureEntre',TimeType::class)
             ->add('debutPause',TimeType::class)
             ->add('finPause',TimeType::class)
             ->add('heureSorti',TimeType::class);

@@ -1,44 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+<div class="panel panel-info  ">
+    <div class="panel-heading">
+        <h3>User {{ user.id }}</h3>
+    </div>
+        <div class="panel-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th class="col-xs-2 text-center" >Modification</th>
+                        </tr>
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <ul>
+                                    <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-warning pull-left">Edit</a>
+                                    {{ form_start(delete_form) }}
+                                        <input type="submit" value="Delete" class="btn btn-danger pull-right">
+                                    {{ form_end(delete_form) }}
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+</div>
     <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+
+            <a href="{{ path('user_index') }}" class="btn btn-primary pull-right">Back to the list</a>
+
     </ul>
 {% endblock %}

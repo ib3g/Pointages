@@ -1,21 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Pointage edit</h1>
+    <div class="panel panel-info  ">
+        <div class="panel-heading">
+            <h3>Edit</h3>
+        </div>
+        <div class="panel-body">
+            {{ form_start(edit_form) }}
+            <div class="form-row">
+                <div class="col-md-3">
+                    {{ form_row(edit_form.date_du_jour) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(edit_form.heureEntre) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(edit_form.debutPause) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(edit_form.finPause) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(edit_form.heureSorti) }}
+                </div>
+                <input type="submit" value="Edit" class="btn btn-success col-md-0 pull-right " />
+            </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+            {{ form_end(edit_form) }}
 
+
+        </div>
+    </div>
     <ul>
-        <li>
-            <a href="{{ path('pointage_index') }}">Back to the list</a>
-        </li>
-        <li>
+        <div >
+            <a class="btn btn-primary pull-right" href="{{ path('pointage_index') }}">Back to the list</a>
+        </div>
+        <div >
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" value="Delete" class="btn btn-danger pull-right">
             {{ form_end(delete_form) }}
-        </li>
+        </div>
     </ul>
 {% endblock %}

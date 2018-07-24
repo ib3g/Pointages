@@ -241,6 +241,13 @@ class user implements  UserInterface
         return [ 'ROLE_USER'];
     }
 
+    public function setRoles($Roles)
+    {
+        $this->Roles = $Roles;
+
+        return $this;
+    }
+
     /**
      * Returns the salt that was originally used to encode the password.
      *

@@ -26,9 +26,9 @@ class userType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class
             ])
-            ->add('submit', SubmitType::class, [
+            ->add('Ajouter', SubmitType::class, [
                         'attr' => [
-                             'class' => 'btn btn-success  pull-right'
+                             'class' => 'btn btn-info  pull-right'
                         ]
             ]);
     }/**
