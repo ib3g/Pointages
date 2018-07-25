@@ -25,11 +25,6 @@ class userType extends AbstractType
             ->add('email', EmailType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class
-            ])
-            ->add('Ajouter', SubmitType::class, [
-                        'attr' => [
-                             'class' => 'btn btn-info  pull-right'
-                        ]
             ]);
     }/**
      * {@inheritdoc}

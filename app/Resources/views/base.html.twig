@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,6 +7,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -15,38 +15,36 @@
     </head>
     <body>
     <nav class="navbar navbar-light" >
-        <div class="container">
+        <div class="container ">
             <div class="navbar-header">
-                    <a href="{{ path('homepage') }}" class="navbar-brand text-info"> Accueil </a>
-            </div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <ul class="nav navbar-nav navbar-left">
-                    <a href="{{ path('pointage_index') }}" class="navbar-brand text-info"> Pointages </a>
-                    <a href="{{ path('user_index') }}" class="navbar-brand text-info"> Utilisateurs </a>
-            </ul>
-            {% endif %}
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <div class="dropdown">
-                        <a class="btn btn dropdown-toggle" type="button" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">  {{ app.user.username }} | Connecté <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('user_show', { 'id': app.user.id }) }}">Profil</a></li>
-                            <li><a href="{{ path('logout') }}" class="text-danger" style="color: #ff5e0b">Déconnexion</a></li>
-                        </ul>
-                    </div>
-                    {% else %}
-                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <a href="{{ path('homepage') }}" class="navbar-brand text-info"> Accueil </a>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('pointage_index') }}" class="navbar-brand text-info"> Pointages </a>
+                        <a href="{{ path('user_index') }}" class="navbar-brand text-info"> Utilisateurs </a>
                 {% endif %}
-                </li>
-            </ul>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <ul >
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <div class="dropdown">
+                                <a class="btn btn dropdown-toggle" type="button" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">  {{ app.user.username }} | Connecté <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('user_show', { 'id': app.user.id }) }}">Profil</a></li>
+                                    <li><a href="{{ path('logout') }}" class="text-danger" style="color: #ff5e0b">Déconnexion</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
         <div class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}
-        {% endblock %}
+            {% block javascripts %}
+            {% endblock %}
     </body>
 </html>

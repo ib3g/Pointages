@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="panel panel-info  ">
+<div class="panel panel-primary  ">
     <div class="panel-heading">
         <h3>Listes Utilisateurs</h3>
     </div>
     <div class="panel-body">
-
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -29,13 +29,14 @@
                 <td>
                     <ul style="text-align: center;">
                             <a class="btn btn-warning"  href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                            <a class="btn btn-primary"  href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                            <a class="btn btn-info"  href="{{ path('user_show', { 'id': user.id }) }}">show</a>
                     </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+        </div>
     </div>
 </div>
     <ul>

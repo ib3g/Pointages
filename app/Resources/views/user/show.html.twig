@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="panel panel-info  ">
+<div class="panel panel-primary  ">
     <div class="panel-heading">
         <h3>User {{ user.id }}</h3>
     </div>
         <div class="panel-body">
+            <div class="table-responsive">
                 <table class="table">
                     <tbody>
                         <tr>
@@ -21,7 +22,7 @@
                             <td>{{ user.prenom }}</td>
                             <td>{{ user.email }}</td>
                             <td>
-                                <ul>
+                                <ul style="text-align: center;">
                                     <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-warning pull-left">Edit</a>
                                     {{ form_start(delete_form) }}
                                         <input type="submit" value="Delete" class="btn btn-danger pull-right">
@@ -30,7 +31,8 @@
                             </td>
                         </tr>
                     </tbody>
-            </table>
+                </table>
+            </div>
         </div>
 </div>
     <ul>
