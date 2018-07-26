@@ -45,6 +45,20 @@ class pointageController extends Controller
             'pointages' => $pointages,
         ));
     }
+    /**
+     * Creates a new pointage entity.
+     *
+     * @Route("/Add", name="AddPointage")
+     * @Method({"GET", "POST"})
+     */
+    public function AddAction(Request $request)
+    {
+        $pointage = new Pointage();
+        $form = $this->createForm('AppBundle\Form\pointageType', $pointage);
+        return $this->render('pointage/AddPointages.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
     /**
      * Creates a new pointage entity.
