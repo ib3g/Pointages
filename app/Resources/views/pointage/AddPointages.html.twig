@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     {% set dateJ = "" %}
+
     <div class="panel panel-primary  ">
         <div class="panel-heading">
             <h3>New Pointage</h3>
@@ -11,23 +13,19 @@
                 <div class="form-row">
                     <div class="col-md-2">
                         <label for="date_J">Date du jour</label>
-                        <div id="Place_datej">
-                        </div>
                         {% if dateJ and dateJ  != null %}
                             <div id="Place_datej">
-                                <input type="text" name="date_J" class="form-control" value="{{ dateJ }}" required>
+                                <input type="text" id="date_J" name="date_J" class="form-control" value="" required>
                             </div>
                         {% else %}
                             <div id="Place_datej">
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-sm">Add</button>
                                 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-sm">
-
                                         <div class="modal-content">
                                             {{ form_row(form.date_du_jour)}}
-                                            <button type="button" id="buttonAdd" class="btn btn-success" > Add</button>
+                                            <button type="button" id="buttonAdd" class="btn btn-success"  data-dismiss="modal" > Add</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -35,10 +33,7 @@
                     </div>
                     <div class="col-md-2">
                         <label for="heure_E">Heure d'entrée</label>
-                        {% if dateJ %}
-                            <input type="text" name="heure_E" class="form-control"  required>
-                        {% endif %}
-
+                            <input type="text" id="heure_E" name="heure_E" class="form-control" disabled>
                     </div>
                     <div class="col-md-2">
                         <label for="debut_P">Debut de pause</label>
@@ -67,11 +62,15 @@
             var day = document.getElementById('appbundle_pointage_date_du_jour_day').value;
             var result = document.getElementById('Place_datej');
                 result.textContent =  day + "/" + month + '/' + year   ;
-                alert( day + "/" + month + '/' + year);
+                var heure= document.getElementById('heure_E');
+                    heure.disabled = false;
+            var resulta = result.textContent;
+                // alert( day + "/" + month + '/' + year);
         }
         var subButton = document.getElementById('buttonAdd');
         subButton.addEventListener('click', getDateJ, false);
     </script>
+
 {% endblock %}
 
 {#{% if dateJ and dateJ  != null %}#}
